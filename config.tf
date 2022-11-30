@@ -1,10 +1,17 @@
-resource "aws_config_config_rule" "r" {
-  name = "example"
+resource "aws_config_config_rule" "tags" {
+  name = "require-tags"
 
   source {
     owner             = "AWS"
-    source_identifier = "S3_BUCKET_VERSIONING_ENABLED"
+    source_identifier = "required-tags"
   }
+
+    input_parameters = <<PARAMETERS
+{
+  "tag1Key": "Name",
+  "tag2Key": "environment"
+}
+PARAMETERS
 
   depends_on = [aws_config_configuration_recorder.config_recorder]
 }
