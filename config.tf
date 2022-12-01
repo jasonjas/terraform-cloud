@@ -3,7 +3,18 @@ resource "aws_config_config_rule" "tags" {
 
   source {
     owner             = "AWS"
-    source_identifier = "required-tags"
+    source_identifier = "REQUIRED_TAGS"
+  }
+
+  scope {
+    compliance_resource_types = [
+      "AWS::EC2::Instance", "AWS::EC2::VPC",
+      "AWS::EC2::Volume", "AWS::EC2::NetworkInterface",
+      "AWS::RDS::DBInstance", "AWS::RDS::DBSnapshot",
+      "AWS::RDS::EventSubscription", "AWS::Redshift::Cluster",
+      "AWS::S3::Bucket", "AWS::EC2::Snapshot",
+      "AWS::CloudFormation::Stack"
+    ]
   }
 
     input_parameters = <<PARAMETERS

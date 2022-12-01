@@ -58,22 +58,24 @@ resource "aws_cloudformation_stack" "sharr_member" {
   ]
 }
 
-resource "aws_cloudformation_stack" "sharr_member_roles" {
-  name = "poc-sharr-member-roles"
+# Size of the file is too large for Terraform, max allowed size is 51.2 KB, this file is over 200 KB.
 
-  template_body = file("${path.module}/security_hub/aws-sharr-member-roles.template")
+# resource "aws_cloudformation_stack" "sharr_member_roles" {
+#   name = "poc-sharr-member-roles"
 
-  parameters = {
-    SecHubAdminAccount = data.aws_caller_identity.current.id
-  }
+#   template_body = file("${path.module}/security_hub/aws-sharr-member-roles.template")
 
-  capabilities = ["CAPABILITY_NAMED_IAM"]
+#   parameters = {
+#     SecHubAdminAccount = data.aws_caller_identity.current.id
+#   }
 
-  tags = {
-    "environment" = "test"
-  }
+#   capabilities = ["CAPABILITY_NAMED_IAM"]
 
-  depends_on = [
-    aws_cloudformation_stack.sharr_member
-  ]
-}
+#   tags = {
+#     "environment" = "test"
+#   }
+
+#   depends_on = [
+#     aws_cloudformation_stack.sharr_member
+#   ]
+# }
