@@ -68,8 +68,7 @@ resource "aws_config_configuration_recorder" "config_recorder" {
   name     = "config_recorder"
   role_arn = aws_iam_role.config_role.arn
   recording_group {
-    all_supported  = false
-    resource_types = ["AWS::ElasticBeanstalk::Application"]
+    all_supported  = true
   }
 }
 
